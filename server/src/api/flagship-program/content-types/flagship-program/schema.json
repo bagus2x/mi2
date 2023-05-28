@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "flagship_programs",
+  "info": {
+    "singularName": "flagship-program",
+    "pluralName": "flagship-programs",
+    "displayName": "Flagship Program"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

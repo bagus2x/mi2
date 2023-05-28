@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "quotes",
+  "info": {
+    "singularName": "quote",
+    "pluralName": "quotes",
+    "displayName": "Quote"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "arab": {
+      "type": "string",
+      "required": true
+    },
+    "bahasa": {
+      "type": "string",
+      "required": true
+    },
+    "source": {
+      "type": "string"
+    }
+  }
+}

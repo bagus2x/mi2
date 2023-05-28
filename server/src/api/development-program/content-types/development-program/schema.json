@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "development_programs",
+  "info": {
+    "singularName": "development-program",
+    "pluralName": "development-programs",
+    "displayName": "Development Program",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "Markdown",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}
