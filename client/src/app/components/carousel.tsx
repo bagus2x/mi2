@@ -1,20 +1,26 @@
 'use client'
 
 import CarouselIndicator from '@mi/app/(home)/components/carousel-indicator'
-import Headline from '@mi/data/models/headline'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
+import { ArrowLeft2, ArrowRight2 } from 'iconsax-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
-interface HeadlineCarouselProps {
-  headlines: Headline[]
+export interface CarouselItem {
+  id: number
+  imageUrl: string
+  caption?: string
+  linkUrl?: string
 }
 
-const HeadlineCarousel = ({ headlines }: HeadlineCarouselProps) => {
+interface CarouselProps {
+  items: CarouselItem[]
+}
+
+const Carousel = ({ items }: CarouselProps) => {
   const [viewportRef, embla] = useEmblaCarousel({ loop: true }, [Autoplay()])
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
@@ -50,17 +56,20 @@ const HeadlineCarousel = ({ headlines }: HeadlineCarouselProps) => {
         ref={viewportRef}
       >
         <div className='embla__container flex h-full w-full'>
-          {headlines.map(({ id, title, image, link, post }) => (
+          {items.map((item) => (
             <div
-              key={id}
-              onClick={() => router.push('')}
+              key={item.id}
               className='embla__slide relative h-full w-full min-w-0 flex-shrink-0 flex-grow-0 basis-full'
             >
-              <Image alt={title || 'headlines'} fill src={image} className='object-cover' />
+              <Image alt={item.caption || 'carousel'} fill src={item.imageUrl} className='object-cover' />
               {
-                (title || link || post) && <div className='w-full px-4 py-4 bg-gray-800 bg-opacity-50 left-0 bottom-0 absolute flex justify-center flex-col items-center gap-4'>
-                  {title && <h1 className='text-xl text-white font-mono'>{title}</h1>}
-                  {(link || post) && <Link href={link || `/post${post?.id}`} className='px-4 py-2 rounded-xl bg-green-500 hover:bg-green-800 text-white text-sm'>Baca</Link>}
+                (item.caption) && <div className='w-full px-4 py-4 bg-gray-800 bg-opacity-60 left-0 bottom-0 absolute flex justify-center flex-col items-center gap-4'>
+                  {item.caption && <h1 onClick={() => {
+                    if (item.linkUrl) {
+                      router.push(item.linkUrl)
+                    }
+                  }} className='text-xs text-white font-mono md:text-xl text-center'>{item.caption}</h1>}
+                  {(item.linkUrl) && <Link href={item.linkUrl} className='px-4 py-2 rounded-xl bg-green-500 hover:bg-green-800 text-white text-sm hidden md:block'>Baca</Link>}
                 </div>
               }
             </div>
@@ -71,7 +80,7 @@ const HeadlineCarousel = ({ headlines }: HeadlineCarouselProps) => {
             onClick={scrollPrev}
             className='invisible absolute left-0 top-[50%] m-4 translate-y-[-50%] rounded-full bg-gray-50 bg-opacity-25 p-1 opacity-0 transition-all group-hover:opacity-100 sm:visible'
           >
-            <MdKeyboardArrowLeft size={40} className='text-green-500' />
+            <ArrowLeft2 size={40} className='text-green-500' />
           </button>
         )}
         {nextBtnEnabled && (
@@ -79,12 +88,12 @@ const HeadlineCarousel = ({ headlines }: HeadlineCarouselProps) => {
             onClick={scrollNext}
             className='invisible absolute right-0 top-[50%] m-4 translate-y-[-50%] rounded-full bg-gray-50 bg-opacity-25 p-1 opacity-0 transition-all group-hover:opacity-100 sm:visible'
           >
-            <MdKeyboardArrowRight size={40} className='text-green-500' />
+            <ArrowRight2 size={40} className='text-green-500' />
           </button>
         )}
       </div>
       <CarouselIndicator
-        count={headlines.length}
+        count={items.length}
         currentIndex={selectedIndex}
         onClick={scrollTo}
       />
@@ -92,4 +101,4 @@ const HeadlineCarousel = ({ headlines }: HeadlineCarouselProps) => {
   )
 }
 
-export default HeadlineCarousel
+export default Carousel

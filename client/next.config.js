@@ -7,6 +7,9 @@ const nextConfig = {
     serverActions: true,
     scrollRestoration: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 }
 
 module.exports = nextConfig

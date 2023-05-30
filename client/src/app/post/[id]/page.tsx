@@ -49,11 +49,14 @@ export default async function PostDetail({ params }: PostDetailProps) {
         <h1 id='title' className='w-full text-4xl font-semibold text-gray-800'>
           {post.title}
         </h1>
-        <DateFormatter
-          date={post.createdAt}
-          pattern='d MMMM yyyy, H:m'
-          className='mt-2 text-xs text-gray-500'
-        />
+        <span className='mt-2 text-xs text-gray-500'>
+          <span>Ditulis pada: </span>
+          <DateFormatter
+            as='span'
+            date={post.createdAt}
+            pattern='d MMMM yyyy, H:m'
+          />
+        </span>
         <div className='mt-4 h-[1px] w-full bg-gray-200' />
         <article className='prose mt-8 w-full max-w-screen-lg'>
           {/* @ts-expect-error Server Component */}

@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "organization_structures",
+  "info": {
+    "singularName": "organization-structure",
+    "pluralName": "organization-structures",
+    "displayName": "Organization Structure",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "structure": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

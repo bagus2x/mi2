@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "code_of_conducts",
+  "info": {
+    "singularName": "code-of-conduct",
+    "pluralName": "code-of-conducts",
+    "displayName": "Code of Conduct",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "Markdown",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor",
+      "required": true
+    }
+  }
+}

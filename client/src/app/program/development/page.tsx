@@ -1,3 +1,5 @@
+import Carousel, { CarouselItem } from '@mi/app/components/carousel'
+import { Media } from '@mi/data/models/media'
 import getDevelopmentProgram from '@mi/data/source/get-development-program'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -16,8 +18,9 @@ export default async function Development() {
   }
 
   return (
-    <main className='mx-auto flex max-w-screen-xl flex-row gap-8 px-4 py-4 lg:py-8 xl:px-4'>
-      <section className='max-w-screen-xl'>
+    <main className='mx-auto flex flex-col gap-8 pb-4 xl:pb-8'>
+      <Carousel items={mapImagesToCarouselItem(development.images)} />
+      <section className='max-w-screen-xl px-4 xl:px-4 mx-auto'>
         <article className='prose w-full max-w-screen-xl'>
           {/* @ts-expect-error Server Component */}
           <MDXRemote
@@ -46,4 +49,15 @@ export default async function Development() {
       </section>
     </main>
   )
+}
+
+
+const mapImagesToCarouselItem = (images: Media[]): CarouselItem[] => {
+  return images.map((image) => {
+    return {
+      id: image.id,
+      imageUrl: image.url,
+      caption: image.caption || image.alternativeText
+    }
+  })
 }

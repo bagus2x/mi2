@@ -1,5 +1,5 @@
 import SectionLabel from '@mi/app/(home)/components/section-label'
-import { getPositiveCulture } from '@mi/data/source/positive-culture-data-source'
+import { getPositiveCulture } from '@mi/data/source/get-possitive-culture'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 

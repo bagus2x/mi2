@@ -1,5 +1,5 @@
 import Category from '@mi/data/models/category'
-import User from '@mi/data/models/user'
+import Profile from '@mi/data/models/user'
 
 export default interface Post {
   id: number
@@ -7,7 +7,7 @@ export default interface Post {
   body: string
   summary: string;
   thumbnail: string
-  author?: User
+  author?: Profile
   categories: Category[]
   createdAt: number
   updatedAt: number

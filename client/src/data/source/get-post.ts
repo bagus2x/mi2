@@ -57,7 +57,7 @@ export type PostResponse = {
           id: number
           attributes: {
             name: string
-            alternativeText: any
+            alternativeText: string
             caption: any
             width: number
             height: number

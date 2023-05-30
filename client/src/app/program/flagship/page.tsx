@@ -1,3 +1,5 @@
+import Carousel, { CarouselItem } from '@mi/app/components/carousel'
+import { Media } from '@mi/data/models/media'
 import getFlagshipProgram from '@mi/data/source/get-flagship-program'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -8,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Program Unggulan',
 }
 
-export default async function Flagship() {
+export default async function Unggulan() {
   const flagship = await getFlagshipProgram()
 
   if (!flagship) {
@@ -16,8 +18,9 @@ export default async function Flagship() {
   }
 
   return (
-    <main className='mx-auto flex max-w-screen-xl flex-row px-4 py-4 lg:py-8 xl:px-4 gap-8'>
-      <section className='max-w-screen-xl'>
+    <main className='mx-auto flex flex-col gap-8 pb-4 xl:pb-8'>
+      <Carousel items={mapImagesToCarouselItem(flagship.images)} />
+      <section className='max-w-screen-xl px-4 xl:px-4 mx-auto'>
         <article className='prose w-full max-w-screen-xl'>
           {/* @ts-expect-error Server Component */}
           <MDXRemote
@@ -46,4 +49,15 @@ export default async function Flagship() {
       </section>
     </main>
   )
+}
+
+
+const mapImagesToCarouselItem = (images: Media[]): CarouselItem[] => {
+  return images.map((image) => {
+    return {
+      id: image.id,
+      imageUrl: image.url,
+      caption: image.caption || image.alternativeText
+    }
+  })
 }

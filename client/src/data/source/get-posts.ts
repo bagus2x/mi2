@@ -17,9 +17,13 @@ const getPosts = async (
         },
       },
     )
-    const { data, meta } = (await res.json()) as GetPostsResponse
 
-    console.log(`HASIL ${data.map(v=> v.id)}`)
+    if(!res.ok) {
+      const error = await res.json()
+      throw error
+    }
+
+    const { data, meta } = (await res.json()) as GetPostsResponse
 
     return {
       data: data.map((post) => ({

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "flagship-program",
     "pluralName": "flagship-programs",
-    "displayName": "Flagship Program"
+    "displayName": "Flagship Program",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,20 @@
   "pluginOptions": {},
   "attributes": {
     "description": {
-      "type": "richtext",
+      "type": "customField",
+      "options": {
+        "output": "Markdown",
+        "preset": "rich"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
       "required": true
     }
   }
