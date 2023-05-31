@@ -1,6 +1,7 @@
 import DateFormatter from '@mi/app/components/date-formatter'
 import getPost from '@mi/data/source/get-post'
 import getPosts from '@mi/data/source/get-posts'
+import { SERVER_BASE_URL } from '@mi/utils/constants'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
@@ -65,7 +66,7 @@ export default async function PostDetail({ params }: PostDetailProps) {
             components={{
               img: (props) => {
                 const src = props.src?.startsWith('/')
-                  ? `${process.env.SERVER_BASE_URL}${props.src}`
+                  ? `${SERVER_BASE_URL}${props.src}`
                   : props.src
                 return <img {...props} src={src} />
               },

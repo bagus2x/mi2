@@ -1,6 +1,7 @@
 import Carousel, { CarouselItem } from '@mi/app/components/carousel'
 import { Media } from '@mi/data/models/media'
 import getDevelopmentProgram from '@mi/data/source/get-development-program'
+import { SERVER_BASE_URL } from '@mi/utils/constants'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
@@ -28,7 +29,7 @@ export default async function Development() {
             components={{
               img: (props) => {
                 const src = props.src?.startsWith('/')
-                  ? `${process.env.SERVER_BASE_URL}${props.src}`
+                  ? `${SERVER_BASE_URL}${props.src}`
                   : props.src
                 return <img {...props} src={src} />
               },

@@ -1,6 +1,7 @@
 'server only'
 
 import Post from '@mi/data/models/post'
+import { SERVER_BASE_URL } from '@mi/utils/constants'
 
 const getPost = async (id: number): Promise<Post> => {
   try {
@@ -28,7 +29,7 @@ const getPost = async (id: number): Promise<Post> => {
         id: category.id,
         name: category.attributes.name,
       })),
-      thumbnail: data.attributes.thumbnail.data.attributes.url,
+      thumbnail: data.attributes.thumbnail.data.attributes.url.startsWith('/') ? `${SERVER_BASE_URL}${data.attributes.thumbnail.data.attributes.url}` : data.attributes.thumbnail.data.attributes.url,
       createdAt: new Date(data.attributes.createdAt).getTime(),
       updatedAt: new Date(data.attributes.updatedAt).getTime(),
     }

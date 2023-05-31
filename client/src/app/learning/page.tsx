@@ -10,7 +10,7 @@ export default async function Schedule() {
     <main className='mx-auto h-full max-w-screen-xl p-4'>
       <SectionLabel label='Jadwal Pembelajaran' />
       <div className='w-full relative mt-8'>
-           <Image
+        <Image
           src={schedule.image}
           alt={schedule.title}
           priority
@@ -21,9 +21,9 @@ export default async function Schedule() {
         />
       </div>
       {schedule.description && <div className='w-full prose mt-4'>
-         {/* @ts-expect-error Server Component */}
-         <MDXRemote source={schedule.description} />
-         </div>}
+        {/* @ts-expect-error Server Component */}
+        <MDXRemote source={schedule.description} />
+      </div>}
     </main>
   )
 }
