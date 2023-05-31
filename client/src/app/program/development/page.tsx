@@ -6,6 +6,7 @@ import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 import { HiShare } from 'react-icons/hi2'
+import { json } from 'stream/consumers'
 
 export const metadata: Metadata = {
   title: 'Program Pengembangan',
@@ -20,6 +21,7 @@ export default async function Development() {
 
   return (
     <main className='mx-auto flex flex-col gap-8 pb-4 xl:pb-8'>
+      <h1>WKKWKW {SERVER_BASE_URL} {JSON.stringify(development)}</h1>
       <Carousel items={mapImagesToCarouselItem(development.images)} />
       <section className='max-w-screen-xl px-4 xl:px-4 mx-auto'>
         <article className='prose w-full max-w-screen-xl'>
