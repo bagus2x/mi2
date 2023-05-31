@@ -20,6 +20,8 @@ export default async function Unggulan() {
 
   return (
     <main className='mx-auto flex flex-col gap-8 pb-4 xl:pb-8'>
+      <h1>WKWKKW {SERVER_BASE_URL}</h1>
+      {JSON.stringify(flagship)}
       <Carousel items={mapImagesToCarouselItem(flagship.images)} />
       <section className='max-w-screen-xl px-4 xl:px-4 mx-auto'>
         <article className='prose w-full max-w-screen-xl'>
