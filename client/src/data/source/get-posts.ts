@@ -18,7 +18,7 @@ const getPosts = async (
       },
     )
 
-    if(!res.ok) {
+    if (!res.ok) {
       const error = await res.json()
       throw error
     }
@@ -32,10 +32,10 @@ const getPosts = async (
         body: post.attributes.body,
         summary: post.attributes.summary,
         author: post.attributes.author ? {
-          id: post.attributes.author?.data.id,
-          username: post.attributes.author?.data.attributes.username,
-          email: post.attributes.author?.data.attributes.email,
-        }: undefined,
+          id: post.attributes.author?.data?.id,
+          username: post.attributes.author?.data?.attributes?.username,
+          email: post.attributes.author?.data?.attributes?.email,
+        } : undefined,
         categories: post.attributes.categories.data.map((category) => ({
           id: category.id,
           name: category.attributes.name,

@@ -19,11 +19,11 @@ const getPost = async (id: number): Promise<Post> => {
       title: data.attributes.title,
       body: data.attributes.body,
       summary: data.attributes.summary,
-      author: {
-        id: data.attributes.author.data.id,
-        username: data.attributes.author.data.attributes.username,
-        email: data.attributes.author.data.attributes.email,
-      },
+      author: data.attributes.author ? {
+        id: data?.attributes?.author?.data?.id,
+        username: data?.attributes?.author?.data?.attributes?.username,
+        email: data?.attributes?.author?.data?.attributes?.email,
+      } : undefined,
       categories: data.attributes.categories.data.map((category) => ({
         id: category.id,
         name: category.attributes.name,
@@ -120,7 +120,7 @@ export type PostResponse = {
           }
         }
       }
-      author: {
+      author?: {
         data: {
           id: number
           attributes: {
