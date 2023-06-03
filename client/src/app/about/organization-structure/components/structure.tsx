@@ -1,7 +1,7 @@
 'use client'
 
 import SectionLabel from '@mi/app/(home)/components/section-label';
-import useDraggableScroll from '@mi/app/about/organization-structure/hooks/use-draggable-scroll';
+import useDraggableScroll from '@mi/utils/hooks/use-draggable-scroll';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { Tree, TreeNode } from 'react-organizational-chart';

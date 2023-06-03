@@ -1,33 +1,12 @@
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import PostList from "@mi/app/post/components/post-list";
+import getPosts from "@mi/data/source/get-posts";
 
-export default function PostList() {
+export default async function Posts() {
+  const posts = await getPosts(1, 10, '&sort[0]=id:desc')
+
   return (
-    <div className='prose mx-auto max-w-screen-xl px-4 py-4 xl:px-0'>
-      {/* @ts-expect-error Server Component */}
-      <MDXRemote
-        source={`
-          I **love** using [Next.js](https://nextjs.org/)
-
-          ![alt text](/images/5s.png)
-
-          \`\`\`js highlight=1,3-5
-          const foo = "bar"
-
-          const hello = () => {
-            return "World"
-          }
-          \`\`\`
-
-          # Heading level 1
-          - bagus
-          - bambang
-
-          # Manusia
-          1. Budi
-          2. Ilham
-          3. Roni
-      `}
-      />
+    <div className='w-full h-full max-w-screen-xl px-4 py-4 lg:py-8 mx-auto'>
+      <PostList initialData={posts} />
     </div>
   )
 }

@@ -7,7 +7,7 @@ import getPosts from '@mi/data/source/get-posts'
 import getQuote from '@mi/data/source/get-quote'
 
 export default async function HomePage() {
-  const [headlines, quote, posts] = await Promise.all([getHeadlines(1, 10), getQuote(), getPosts(1, 10),])
+  const [headlines, quote, posts] = await Promise.all([getHeadlines(1, 10), getQuote(), getPosts(1, 10, '&sort[0]=id:desc'),])
 
   return (
     <main className='h-full w-full overflow-auto'>

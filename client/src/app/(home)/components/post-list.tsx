@@ -4,6 +4,7 @@ import PostCard from '@mi/app/(home)/components/post-card'
 import SectionLabel from '@mi/app/(home)/components/section-label'
 import Pagination from '@mi/data/models/pagination'
 import Post from '@mi/data/models/post'
+import Link from 'next/link'
 
 interface PostListProps {
   posts: Post[]
@@ -19,6 +20,7 @@ export default function PostList({ posts, pagination }: PostListProps) {
           <PostCard key={post.id} post={post} />
         ))}
       </div>
+      <Link href="/post" className='mx-auto text-sm px-4 py-2 ring-1 ring-green-500 rounded-xl text-gray-800 mt-8'>Muat Lebih Banyak</Link>
     </section>
   )
 }

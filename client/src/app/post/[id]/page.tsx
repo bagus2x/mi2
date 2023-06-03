@@ -2,12 +2,12 @@ import DateFormatter from '@mi/app/components/date-formatter'
 import getPost from '@mi/data/source/get-post'
 import getPosts from '@mi/data/source/get-posts'
 import { SERVER_BASE_URL } from '@mi/utils/constants'
+import { Share } from 'iconsax-react'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { HiShare } from 'react-icons/hi2'
 
 interface PostDetailProps {
   params: {
@@ -90,7 +90,7 @@ export default async function PostDetail({ params }: PostDetailProps) {
               className='rounded-full text-xs text-gray-800 hover:bg-green-50'
               role='button'
             >
-              <HiShare size={16} className='m-2' />
+              <Share size={16} className='m-2' />
             </button>
           </div>
         </div>

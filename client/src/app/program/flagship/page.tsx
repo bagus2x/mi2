@@ -2,10 +2,10 @@ import Carousel, { CarouselItem } from '@mi/app/components/carousel'
 import { Media } from '@mi/data/models/media'
 import getFlagshipProgram from '@mi/data/source/get-flagship-program'
 import { SERVER_BASE_URL } from '@mi/utils/constants'
+import { Share } from 'iconsax-react'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
-import { HiShare } from 'react-icons/hi2'
 
 export const metadata: Metadata = {
   title: 'Program Unggulan',
@@ -43,7 +43,7 @@ export default async function Unggulan() {
               className='rounded-full text-xs text-gray-800 hover:bg-green-50'
               role='button'
             >
-              <HiShare size={16} className='m-2' />
+              <Share size={16} className='m-2' />
             </button>
           </div>
         </div>

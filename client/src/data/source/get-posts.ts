@@ -1,5 +1,3 @@
-'server only'
-
 import { Paging } from '@mi/data/models/paging'
 import Post from '@mi/data/models/post'
 
@@ -8,53 +6,48 @@ const getPosts = async (
   pageSize: number,
   filters: string = ''
 ): Promise<Paging<Post>> => {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/api/posts?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=author,thumbnail,categories${filters}`,
-      {
-        next: {
-          revalidate: 0,
-        },
+  const res = await fetch(
+    `${BASE_URL}/api/posts?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=author,thumbnail,categories${filters}`,
+    {
+      next: {
+        revalidate: 0,
       },
-    )
+    },
+  )
 
-    if (!res.ok) {
-      const error = await res.json()
-      throw error
-    }
+  if (!res.ok) {
+    const error = await res.json()
+    throw error
+  }
 
-    const { data, meta } = (await res.json()) as GetPostsResponse
+  const { data, meta } = (await res.json()) as GetPostsResponse
 
-    return {
-      data: data.map((post) => ({
-        id: post.id,
-        title: post.attributes.title,
-        body: post.attributes.body,
-        summary: post.attributes.summary,
-        author: post.attributes.author ? {
-          id: post.attributes.author?.data?.id,
-          username: post.attributes.author?.data?.attributes?.username,
-          email: post.attributes.author?.data?.attributes?.email,
-        } : undefined,
-        categories: post.attributes.categories.data.map((category) => ({
-          id: category.id,
-          name: category.attributes.name,
-        })),
-        thumbnail: `${BASE_URL}${post.attributes.thumbnail.data.attributes.url}`,
-        createdAt: new Date(post.attributes.createdAt).getTime(),
-        updatedAt: new Date(post.attributes.updatedAt).getTime(),
+  return {
+    data: data.map((post) => ({
+      id: post.id,
+      title: post.attributes.title,
+      body: post.attributes.body,
+      summary: post.attributes.summary,
+      author: post.attributes.author ? {
+        id: post.attributes.author?.data?.id,
+        username: post.attributes.author?.data?.attributes?.username,
+        email: post.attributes.author?.data?.attributes?.email,
+      } : undefined,
+      categories: post.attributes.categories.data.map((category) => ({
+        id: category.id,
+        name: category.attributes.name,
       })),
-      pagination: meta.pagination,
-    }
-  } catch (error: any) {
-    console.error(`ERROR getPosts ${error}`)
-    throw new Error(error?.error?.message || 'Internal error')
+      thumbnail: `${BASE_URL}${post.attributes.thumbnail.data.attributes.url}`,
+      createdAt: new Date(post.attributes.createdAt).getTime(),
+      updatedAt: new Date(post.attributes.updatedAt).getTime(),
+    })),
+    pagination: meta.pagination,
   }
 }
 
 export default getPosts
 
-const BASE_URL = process.env.SERVER_BASE_URL
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL
 
 export type GetPostsResponse = {
   data: Array<{

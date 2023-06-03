@@ -1,9 +1,7 @@
 import FacilityList from '@mi/app/about/facility/components/facility-list'
 import getDevelopmentProgram from '@mi/data/source/get-development-program'
 import { Metadata } from 'next'
-import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
-import { HiShare } from 'react-icons/hi2'
 
 export const metadata: Metadata = {
   title: 'Fasilitas Sekolah',
