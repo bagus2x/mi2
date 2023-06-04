@@ -1,8 +1,11 @@
-import Program from "@mi/data/models/program";
+import Program from '@mi/data/models/program'
 
 const getDevelopmentProgram = async (): Promise<Program | null> => {
-  const res = await fetch(`${BASE_URL}/api/development-program?populate=images`, { next: { revalidate: 0 } })
-  const program = await res.json() as GetFlagshipProgramResponse
+  const res = await fetch(
+    `${BASE_URL}/api/development-program?populate=images`,
+    { next: { revalidate: 0 } },
+  )
+  const program = (await res.json()) as GetFlagshipProgramResponse
 
   if (!program.data) {
     return null
@@ -12,11 +15,13 @@ const getDevelopmentProgram = async (): Promise<Program | null> => {
     description: program.data.attributes.description,
     images: program.data.attributes.images.data.map((image) => ({
       id: image.id,
-      url: image.attributes.url.startsWith('/') ? `${BASE_URL}${image.attributes.url}`: image.attributes.url,
+      url: image.attributes.url.startsWith('/')
+        ? `${BASE_URL}${image.attributes.url}`
+        : image.attributes.url,
       alternativeText: image.attributes.alternativeText,
       caption: image.attributes.caption,
       mime: image.attributes.mime,
-    }))
+    })),
   }
 }
 
@@ -104,4 +109,3 @@ export type GetFlagshipProgramResponse = {
   }
   meta: {}
 }
-

@@ -38,15 +38,18 @@ export const generateMetadata = async ({
 
 export default async function PostDetail({ params }: PostDetailProps) {
   const postId = parseInt(params.id)
-  const [post, reccomendedPosts] = await Promise.all([getPost(postId), getPosts(1, 5, `&filters[id][$not][$eq]=${postId}`)])
+  const [post, reccomendedPosts] = await Promise.all([
+    getPost(postId),
+    getPosts(1, 5, `&filters[id][$not][$eq]=${postId}`),
+  ])
 
   if (!post) {
     notFound()
   }
 
   return (
-    <main className='mx-auto flex max-w-screen-xl md:flex-row px-4 py-4 lg:py-8 xl:px-4 gap-8 flex-col'>
-      <section className='max-w-screen-lg w-full'>
+    <main className='mx-auto flex max-w-screen-xl flex-col gap-8 px-4 py-4 md:flex-row lg:py-8 xl:px-4'>
+      <section className='w-full max-w-screen-lg'>
         <h1 id='title' className='w-full text-4xl font-semibold text-gray-800'>
           {post.title}
         </h1>
@@ -95,20 +98,34 @@ export default async function PostDetail({ params }: PostDetailProps) {
           </div>
         </div>
       </section>
-      <aside className='md:w-80 shrink-0 w-full'>
+      <aside className='w-full shrink-0 md:w-80'>
         <div>
-          <h6 className='text-2xl text-gray-800 font-semibold'>Kabar Terbaru</h6>
-          <ul className='mt-4 gap-8 flex flex-col'>
+          <h6 className='text-2xl font-semibold text-gray-800'>
+            Kabar Terbaru
+          </h6>
+          <ul className='mt-4 flex flex-col gap-8'>
             {reccomendedPosts.data.map((post) => (
               <li key={post.id}>
-                <Link key={post.id} href={`/post/${post.id}`} className='w-full flex flex-row space-x-2' >
-                  <div className='relative w-24 h-24 shrink-0 rounded-lg overflow-hidden'>
+                <Link
+                  key={post.id}
+                  href={`/post/${post.id}`}
+                  className='flex w-full flex-row space-x-2'
+                >
+                  <div className='relative h-24 w-24 shrink-0 overflow-hidden rounded-lg'>
                     <Image fill src={post.thumbnail} alt={post.title} />
                   </div>
                   <div className='grow'>
-                    <span className='text-base text-gray-800 line-clamp-1'>{post.title}</span>
-                    <p className='text-sm line-clamp-2 text-gray-500'>{post.summary}</p>
-                    <DateFormatter date={post.updatedAt} pattern='d MMMM yyyy, H:m' className='text-xs text-gray-400 mt-1' />
+                    <span className='line-clamp-1 text-base text-gray-800'>
+                      {post.title}
+                    </span>
+                    <p className='line-clamp-2 text-sm text-gray-500'>
+                      {post.summary}
+                    </p>
+                    <DateFormatter
+                      date={post.updatedAt}
+                      pattern='d MMMM yyyy, H:m'
+                      className='mt-1 text-xs text-gray-400'
+                    />
                   </div>
                 </Link>
               </li>

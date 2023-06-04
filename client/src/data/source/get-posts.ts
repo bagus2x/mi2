@@ -4,7 +4,7 @@ import Post from '@mi/data/models/post'
 const getPosts = async (
   page: number,
   pageSize: number,
-  filters: string = ''
+  filters: string = '',
 ): Promise<Paging<Post>> => {
   const res = await fetch(
     `${BASE_URL}/api/posts?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=author,thumbnail,categories${filters}`,
@@ -28,11 +28,13 @@ const getPosts = async (
       title: post.attributes.title,
       body: post.attributes.body,
       summary: post.attributes.summary,
-      author: post.attributes.author ? {
-        id: post.attributes.author?.data?.id,
-        username: post.attributes.author?.data?.attributes?.username,
-        email: post.attributes.author?.data?.attributes?.email,
-      } : undefined,
+      author: post.attributes.author
+        ? {
+            id: post.attributes.author?.data?.id,
+            username: post.attributes.author?.data?.attributes?.username,
+            email: post.attributes.author?.data?.attributes?.email,
+          }
+        : undefined,
       categories: post.attributes.categories.data.map((category) => ({
         id: category.id,
         name: category.attributes.name,

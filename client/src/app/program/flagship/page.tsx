@@ -21,7 +21,7 @@ export default async function Unggulan() {
   return (
     <main className='mx-auto flex flex-col gap-8 pb-4 xl:pb-8'>
       <Carousel items={mapImagesToCarouselItem(flagship.images)} />
-      <section className='max-w-screen-xl px-4 xl:px-4 mx-auto'>
+      <section className='mx-auto max-w-screen-xl px-4 xl:px-4'>
         <article className='prose w-full max-w-screen-xl'>
           {/* @ts-expect-error Server Component */}
           <MDXRemote
@@ -52,13 +52,12 @@ export default async function Unggulan() {
   )
 }
 
-
 const mapImagesToCarouselItem = (images: Media[]): CarouselItem[] => {
   return images.map((image) => {
     return {
       id: image.id,
       imageUrl: image.url,
-      caption: image.caption || image.alternativeText
+      caption: image.caption || image.alternativeText,
     }
   })
 }

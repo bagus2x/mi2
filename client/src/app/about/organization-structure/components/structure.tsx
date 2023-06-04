@@ -1,36 +1,35 @@
 'use client'
 
-import SectionLabel from '@mi/app/(home)/components/section-label';
-import useDraggableScroll from '@mi/utils/hooks/use-draggable-scroll';
-import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import { Tree, TreeNode } from 'react-organizational-chart';
+import SectionLabel from '@mi/app/(home)/components/section-label'
+import useDraggableScroll from '@mi/utils/hooks/use-draggable-scroll'
+import Image from 'next/image'
+import { useEffect, useRef } from 'react'
+import { Tree, TreeNode } from 'react-organizational-chart'
 export default function Structure() {
   const { containerRef, onMouseDown } = useDraggableScroll<HTMLDivElement>()
 
   return (
-    <section className='pb-4 cursor-pointer  w-full'>
-      <div className='max-w-screen-xl mx-auto px-4'>
+    <section className='w-full cursor-pointer  pb-4'>
+      <div className='mx-auto max-w-screen-xl px-4'>
         <SectionLabel label='Struktur Organisasi' />
-        <p className='text-gray-800 mt-4'>Struktur organisasi Madrasah Islamiyah Purwojati tahun pelajaran 2022/2023</p>
+        <p className='mt-4 text-gray-800'>
+          Struktur organisasi Madrasah Islamiyah Purwojati tahun pelajaran
+          2022/2023
+        </p>
       </div>
-      <div onMouseDown={onMouseDown} className='py-4 flex flex-col space-y-4'>
+      <div onMouseDown={onMouseDown} className='flex flex-col space-y-4 py-4'>
         <div ref={containerRef} className='max-w-[100vw] overflow-x-auto py-4'>
           <GraphRoot root={data} />
         </div>
-        <div className='flex flex-col space-y-4 px-4 items-start max-w-screen-xl mx-auto w-full'>
+        <div className='mx-auto flex w-full max-w-screen-xl flex-col items-start space-y-4 px-4'>
           <h6 className='text-gray-800'>Keterangan: </h6>
-          <div className='flex space-x-4 items-center'>
-            <span className='w-10 h-5 border-x-1 rounded-lg border border-gray-800' />
-            <span className='text-xs text-gray-800'>
-              Komando
-            </span>
+          <div className='flex items-center space-x-4'>
+            <span className='border-x-1 h-5 w-10 rounded-lg border border-gray-800' />
+            <span className='text-xs text-gray-800'>Komando</span>
           </div>
-          <div className='flex space-x-4 items-center'>
-            <span className='w-10 h-5 border-x-1 border-dashed rounded-lg border border-gray-800' />
-            <span className='text-xs text-gray-800'>
-              Koordinator
-            </span>
+          <div className='flex items-center space-x-4'>
+            <span className='border-x-1 h-5 w-10 rounded-lg border border-dashed border-gray-800' />
+            <span className='text-xs text-gray-800'>Koordinator</span>
           </div>
         </div>
       </div>
@@ -54,7 +53,6 @@ type CoordinationNode = {
   type: string
 }
 
-
 type LabelNode = {
   text: string
   children?: NodeType[]
@@ -70,23 +68,27 @@ type SpanNode = {
 type NodeType = ComandoNode | LabelNode | SpanNode | CoordinationNode
 
 const isSpanNode = (obj: NodeType): obj is SpanNode => {
-  return obj.type === 'span';
+  return obj.type === 'span'
 }
 
 const isTypeComandoNode = (obj: NodeType): obj is ComandoNode => {
-  return obj.type === 'comando';
+  return obj.type === 'comando'
 }
 
 const isTypeCoordinationNode = (obj: NodeType): obj is CoordinationNode => {
-  return obj.type === 'coordination';
+  return obj.type === 'coordination'
 }
 
-function Node({ node, root }: { node: NodeType, root?: boolean }) {
+function Node({ node, root }: { node: NodeType; root?: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (root) {
-      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      ref.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      })
     }
   }, [])
 
@@ -96,13 +98,23 @@ function Node({ node, root }: { node: NodeType, root?: boolean }) {
 
   if (isTypeComandoNode(node)) {
     return (
-      <div ref={ref} className="rounded-2xl inline-block shadow border border-gray-800 overflow-clip mx-4 transition-all hover:scale-105">
-        <div className='flex flex-col min-w-[120px] max-w-xs w-full'>
-          <div className='relative w-full h-full aspect-square'>
-            <Image src={node.photo || '/images/profile-placeholder.png'} alt={node.name} fill className='pointer-events-none' />
+      <div
+        ref={ref}
+        className='mx-4 inline-block overflow-clip rounded-2xl border border-gray-800 shadow transition-all hover:scale-105'
+      >
+        <div className='flex w-full min-w-[120px] max-w-xs flex-col'>
+          <div className='relative aspect-square h-full w-full'>
+            <Image
+              src={node.photo || '/images/profile-placeholder.png'}
+              alt={node.name}
+              fill
+              className='pointer-events-none'
+            />
           </div>
-          <span className='p-2 text-gray-800 text-[10px]'>{node.name}</span>
-          <span className='px-2 pb-2 text-gray-800 text-[11px]'>{node.position}</span>
+          <span className='p-2 text-[10px] text-gray-800'>{node.name}</span>
+          <span className='px-2 pb-2 text-[11px] text-gray-800'>
+            {node.position}
+          </span>
         </div>
       </div>
     )
@@ -110,20 +122,26 @@ function Node({ node, root }: { node: NodeType, root?: boolean }) {
 
   if (isTypeCoordinationNode(node)) {
     return (
-      <div className="rounded-2xl inline-block shadow border border-dashed border-gray-800 overflow-clip mx-4 transition-all hover:scale-105">
-        <div className='flex flex-col min-w-[120px] max-w-xs w-full'>
-          <div className='relative w-full h-full aspect-square'>
-            <Image src={node.photo || '/images/profile-placeholder.png'} alt={node.name} fill />
+      <div className='mx-4 inline-block overflow-clip rounded-2xl border border-dashed border-gray-800 shadow transition-all hover:scale-105'>
+        <div className='flex w-full min-w-[120px] max-w-xs flex-col'>
+          <div className='relative aspect-square h-full w-full'>
+            <Image
+              src={node.photo || '/images/profile-placeholder.png'}
+              alt={node.name}
+              fill
+            />
           </div>
-          <span className='p-2 text-gray-800 text-[10px]'>{node.name}</span>
-          <span className='px-2 pb-2 text-gray-800 text-[11px]'>{node.position}</span>
+          <span className='p-2 text-[10px] text-gray-800'>{node.name}</span>
+          <span className='px-2 pb-2 text-[11px] text-gray-800'>
+            {node.position}
+          </span>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="px-4 py-2 rounded-2xl inline-block bg-gray-800 text-white">
+    <div className='inline-block rounded-2xl bg-gray-800 px-4 py-2 text-white'>
       {node.text}
     </div>
   )
@@ -141,19 +159,19 @@ const data: ComandoNode = {
         {
           name: 'Rantining,S.Pd',
           position: 'Petugas Perpustakaan',
-          type: 'comando'
+          type: 'comando',
         },
         {
           name: 'Moch. Gustyawan',
           position: 'Petugas Tata Usaha',
-          type: 'comando'
+          type: 'comando',
         },
         {
           name: 'Khofidhotur R., S.Pd',
           position: 'Bendahara BOS',
-          type: 'comando'
-        }
-      ]
+          type: 'comando',
+        },
+      ],
     },
     {
       text: 'KELOMPOK JABATAN FUNGSIONAL / GURU',
@@ -192,8 +210,8 @@ const data: ComandoNode = {
               name: 'Moch. Gustyawan',
               position: 'Wali Kelas 6',
               type: 'comando',
-            }
-          ]
+            },
+          ],
         },
         {
           text: 'Ekstrakulikuler',
@@ -228,10 +246,10 @@ const data: ComandoNode = {
               name: 'Moch. Gustyawan',
               position: 'Kelas 6',
               type: 'comando',
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'ACH. MUHYIDDIN S.Pd',
@@ -243,12 +261,12 @@ const data: ComandoNode = {
       position: 'Badan Peran Serta Masyarakat',
       type: 'coordination',
     },
-  ]
+  ],
 }
 
 function GraphRoot({ root }: { root: NodeType }) {
   return (
-    <Tree label={<Node node={root} root />} >
+    <Tree label={<Node node={root} root />}>
       <GraphNodes nodes={root.children} />
     </Tree>
   )

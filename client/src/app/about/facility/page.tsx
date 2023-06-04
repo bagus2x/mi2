@@ -15,7 +15,7 @@ export default async function Development() {
   }
 
   return (
-    <main className='mx-auto flex max-w-screen-xl flex-row px-4 py-4 xl:py-8 gap-8'>
+    <main className='mx-auto flex max-w-screen-xl flex-row gap-8 px-4 py-4 xl:py-8'>
       <FacilityList />
     </main>
   )

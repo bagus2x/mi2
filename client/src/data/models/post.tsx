@@ -5,7 +5,7 @@ export default interface Post {
   id: number
   title: string
   body: string
-  summary: string;
+  summary: string
   thumbnail: string
   author?: Profile
   categories: Category[]

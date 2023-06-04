@@ -20,7 +20,12 @@ export default function PostList({ posts, pagination }: PostListProps) {
           <PostCard key={post.id} post={post} />
         ))}
       </div>
-      <Link href="/post" className='mx-auto text-sm px-4 py-2 ring-1 ring-green-500 rounded-xl text-gray-800 mt-8'>Muat Lebih Banyak</Link>
+      <Link
+        href='/post'
+        className='mx-auto mt-8 rounded-xl px-4 py-2 text-sm text-gray-800 ring-1 ring-green-500'
+      >
+        Muat Lebih Banyak
+      </Link>
     </section>
   )
 }

@@ -1,13 +1,13 @@
-import Quote from "@mi/data/models/quote";
+import Quote from '@mi/data/models/quote'
 
 const getQuote = async (): Promise<Quote> => {
   const res = await fetch(`${BASE_URL}/api/quote`, { next: { revalidate: 0 } })
-  const quote = await res.json() as GetQuoteResponse
+  const quote = (await res.json()) as GetQuoteResponse
 
   return {
     arab: quote.data.attributes.arab,
     bahasa: quote.data.attributes.bahasa,
-    source: quote.data.attributes.source
+    source: quote.data.attributes.source,
   }
 }
 

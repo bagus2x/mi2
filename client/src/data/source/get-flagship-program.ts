@@ -14,11 +14,13 @@ const getFlagshipProgram = async (): Promise<Program | null> => {
     description: program.data.attributes.description,
     images: program.data.attributes.images.data.map((image) => ({
       id: image.id,
-      url: image.attributes.url.startsWith('/') ? `${BASE_URL}${image.attributes.url}`: image.attributes.url,
+      url: image.attributes.url.startsWith('/')
+        ? `${BASE_URL}${image.attributes.url}`
+        : image.attributes.url,
       alternativeText: image.attributes.alternativeText,
       caption: image.attributes.caption,
       mime: image.attributes.mime,
-    }))
+    })),
   }
 }
 
@@ -26,7 +28,7 @@ export default getFlagshipProgram
 
 const BASE_URL = process.env.SERVER_BASE_URL
 
-export type GetFlagshipProgramResponse =  {
+export type GetFlagshipProgramResponse = {
   data: {
     id: number
     attributes: {
@@ -106,4 +108,3 @@ export type GetFlagshipProgramResponse =  {
   }
   meta: {}
 }
-

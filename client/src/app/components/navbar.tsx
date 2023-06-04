@@ -51,13 +51,17 @@ function MobileMenu() {
             className='mx-4 my-2 h-10 w-10 overflow-hidden rounded-full transition-all hover:bg-green-100'
             onClick={() => setOpen(false)}
           >
-            <Close size={24} className='m-2 text-gray-800 rotate-45' />
+            <Close size={24} className='m-2 rotate-45 text-gray-800' />
           </button>
         </div>
         <ul className='flex flex-col items-end space-y-2 p-2'>
           {navbarItems.map((navbarItem, index) =>
             navbarItem.subItems?.length ? (
-              <MobileDropdownMenuItem key={index} item={navbarItem} onClick={() => setOpen(false)} />
+              <MobileDropdownMenuItem
+                key={index}
+                item={navbarItem}
+                onClick={() => setOpen(false)}
+              />
             ) : (
               <li key={index} className='flex w-full'>
                 <Link
@@ -80,11 +84,14 @@ function MobileMenu() {
 }
 
 interface MobileDropdownMenuItemProps {
-  item: NavbarItem,
+  item: NavbarItem
   onClick: (item: NavbarItem) => void
 }
 
-function MobileDropdownMenuItem({ item, onClick }: MobileDropdownMenuItemProps) {
+function MobileDropdownMenuItem({
+  item,
+  onClick,
+}: MobileDropdownMenuItemProps) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -176,7 +183,7 @@ function DesktopMenu() {
                         key={index}
                         href={subItem.href}
                         onClick={() => close()}
-                        className='flex select-none items-center gap-2 rounded-xl px-4 py-2 text-sm text-gray-900 transition hover:bg-green-500 hover:text-white whitespace-nowrap'
+                        className='flex select-none items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-sm text-gray-900 transition hover:bg-green-500 hover:text-white'
                       >
                         {subItem.text}
                       </Link>
@@ -230,7 +237,7 @@ const navbarItems: NavbarItem[] = [
       },
       {
         text: 'Guru dan Karyawan',
-        href: '/about/teachers'
+        href: '/about/teachers',
       },
       {
         text: 'Tata Tertib',
@@ -264,7 +271,7 @@ const navbarItems: NavbarItem[] = [
   },
   {
     text: 'Downloads',
-    href: '/downloads'
+    href: '/downloads',
   },
   {
     text: 'Kontak',

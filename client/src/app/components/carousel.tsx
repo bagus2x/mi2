@@ -61,17 +61,36 @@ const Carousel = ({ items }: CarouselProps) => {
               key={item.id}
               className='embla__slide relative h-full w-full min-w-0 flex-shrink-0 flex-grow-0 basis-full'
             >
-              <Image alt={item.caption || 'carousel'} fill src={item.imageUrl} className='object-cover' />
-              {
-                (item.caption) && <div className='w-full px-4 py-4 bg-gray-800 bg-opacity-60 left-0 bottom-0 absolute flex justify-center flex-col items-center gap-4'>
-                  {item.caption && <h1 onClick={() => {
-                    if (item.linkUrl) {
-                      router.push(item.linkUrl)
-                    }
-                  }} className='text-xs text-white font-mono md:text-xl text-center'>{item.caption}</h1>}
-                  {(item.linkUrl) && <Link href={item.linkUrl} className='px-4 py-2 rounded-xl bg-green-500 hover:bg-green-800 text-white text-sm hidden md:block'>Baca</Link>}
+              <Image
+                alt={item.caption || 'carousel'}
+                fill
+                src={item.imageUrl}
+                className='object-cover'
+              />
+              {item.caption && (
+                <div className='absolute bottom-0 left-0 flex w-full flex-col items-center justify-center gap-4 bg-gray-800 bg-opacity-60 px-4 py-4'>
+                  {item.caption && (
+                    <h1
+                      onClick={() => {
+                        if (item.linkUrl) {
+                          router.push(item.linkUrl)
+                        }
+                      }}
+                      className='text-center font-mono text-xs text-white md:text-xl'
+                    >
+                      {item.caption}
+                    </h1>
+                  )}
+                  {item.linkUrl && (
+                    <Link
+                      href={item.linkUrl}
+                      className='hidden rounded-xl bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-800 md:block'
+                    >
+                      Baca
+                    </Link>
+                  )}
                 </div>
-              }
+              )}
             </div>
           ))}
         </div>

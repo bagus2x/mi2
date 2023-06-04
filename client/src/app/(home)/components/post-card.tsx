@@ -32,7 +32,9 @@ export default function PostCard({ post }: PostCardProps) {
             </span>
           ))}
         </div>
-        <p className='mt-2 line-clamp-2 text-sm text-gray-600'>{post.summary}</p>
+        <p className='mt-2 line-clamp-2 text-sm text-gray-600'>
+          {post.summary}
+        </p>
         <div className='mt-2 flex justify-between space-x-4'>
           <DateFormatter
             pattern='d MMMM yyyy, H:m'

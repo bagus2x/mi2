@@ -9,7 +9,7 @@ export default async function Schedule() {
   return (
     <main className='mx-auto h-full max-w-screen-xl p-4'>
       <SectionLabel label='Jadwal Pembelajaran' />
-      <div className='w-full relative mt-8'>
+      <div className='relative mt-8 w-full'>
         <Image
           src={schedule.image}
           alt={schedule.title}
@@ -20,10 +20,12 @@ export default async function Schedule() {
           className='h-full w-full transition-all delay-1000'
         />
       </div>
-      {schedule.description && <div className='w-full prose mt-4'>
-        {/* @ts-expect-error Server Component */}
-        <MDXRemote source={schedule.description} />
-      </div>}
+      {schedule.description && (
+        <div className='prose mt-4 w-full'>
+          {/* @ts-expect-error Server Component */}
+          <MDXRemote source={schedule.description} />
+        </div>
+      )}
     </main>
   )
 }

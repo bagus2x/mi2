@@ -1,6 +1,6 @@
-import { CodeOfConduct } from "@mi/data/models/code-of-conduct"
-import { SERVER_BASE_URL } from "@mi/utils/constants"
-import { ApiError } from "next/dist/server/api-utils"
+import { CodeOfConduct } from '@mi/data/models/code-of-conduct'
+import { SERVER_BASE_URL } from '@mi/utils/constants'
+import { ApiError } from 'next/dist/server/api-utils'
 
 const getCodeOfConduct = async (): Promise<CodeOfConduct | null> => {
   const res = await fetch(`${SERVER_BASE_URL}/api/code-of-conduct`)
@@ -10,21 +10,24 @@ const getCodeOfConduct = async (): Promise<CodeOfConduct | null> => {
       return null
     }
 
-    const errorRes = await res.json() as { error: ApiError }
+    const errorRes = (await res.json()) as { error: ApiError }
     throw errorRes.error
   }
 
-  const codeOfConduct = await res.json() as GetCodeOfConductRespon
+  const codeOfConduct = (await res.json()) as GetCodeOfConductRespon
 
   return {
     body: codeOfConduct.data.attributes.description,
-    image: codeOfConduct.data.attributes.image ? {
-      id: codeOfConduct.data.attributes.image.data.id,
-      mime: codeOfConduct.data.attributes.image.data.attributes.mime,
-      alternativeText: codeOfConduct.data.attributes.image.data.attributes.alternativeText,
-      caption: codeOfConduct.data.attributes.image.data.attributes.caption,
-      url: codeOfConduct.data.attributes.image.data.attributes.url
-    } : undefined
+    image: codeOfConduct.data.attributes.image
+      ? {
+          id: codeOfConduct.data.attributes.image.data.id,
+          mime: codeOfConduct.data.attributes.image.data.attributes.mime,
+          alternativeText:
+            codeOfConduct.data.attributes.image.data.attributes.alternativeText,
+          caption: codeOfConduct.data.attributes.image.data.attributes.caption,
+          url: codeOfConduct.data.attributes.image.data.attributes.url,
+        }
+      : undefined,
   }
 }
 

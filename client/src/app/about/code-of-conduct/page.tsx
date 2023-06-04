@@ -17,7 +17,7 @@ export default async function CodeOfConduct() {
   }
 
   return (
-    <main className='mx-auto flex-col flex max-w-screen-xl px-4 py-4 lg:py-8 gap-4'>
+    <main className='mx-auto flex max-w-screen-xl flex-col gap-4 px-4 py-4 lg:py-8'>
       <SectionLabel label='Tata Tertib' />
       <article className='prose w-full max-w-screen-xl'>
         {/* @ts-expect-error Server Component */}
@@ -25,7 +25,9 @@ export default async function CodeOfConduct() {
           source={codeOfConduct.body}
           components={{
             img: (props) => {
-              const src = props.src?.startsWith('/') ? `${SERVER_BASE_URL}${props.src}` : props.src
+              const src = props.src?.startsWith('/')
+                ? `${SERVER_BASE_URL}${props.src}`
+                : props.src
               return <img {...props} src={src} />
             },
           }}

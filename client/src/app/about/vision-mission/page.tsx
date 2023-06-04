@@ -16,7 +16,7 @@ export default async function Development() {
   }
 
   return (
-    <main className='mx-auto flex max-w-screen-xl flex-col px-4 py-4 lg:py-8 gap-8'>
+    <main className='mx-auto flex max-w-screen-xl flex-col gap-8 px-4 py-4 lg:py-8'>
       <History />
       <VisionMissionCarousel />
     </main>

@@ -7,7 +7,11 @@ import getPosts from '@mi/data/source/get-posts'
 import getQuote from '@mi/data/source/get-quote'
 
 export default async function HomePage() {
-  const [headlines, quote, posts] = await Promise.all([getHeadlines(1, 10), getQuote(), getPosts(1, 10, '&sort[0]=id:desc'),])
+  const [headlines, quote, posts] = await Promise.all([
+    getHeadlines(1, 10),
+    getQuote(),
+    getPosts(1, 3, '&sort[0]=id:desc'),
+  ])
 
   return (
     <main className='h-full w-full overflow-auto'>
@@ -24,7 +28,9 @@ const mapHeadlineToCarouselItem = (headlines: Headline[]): CarouselItem[] => {
       id: headline.id,
       imageUrl: headline.image,
       caption: headline.title,
-      linkUrl: headline.link || (headline.post ? `/post/${headline.post.id}` : undefined)
+      linkUrl:
+        headline.link ||
+        (headline.post ? `/post/${headline.post.id}` : undefined),
     }
   })
 }

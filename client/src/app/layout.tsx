@@ -4,6 +4,7 @@ import Navbar from '@mi/app/components/navbar'
 import Footer from '@mi/app/components/footer'
 import { Poppins, Roboto_Mono } from 'next/font/google'
 import ReactQueryProvider from '@mi/app/react-query-provider'
+import Toaster from '@mi/app/components/toaster'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -37,6 +38,7 @@ export default function RootLayout({
           <div className='mt-14 min-h-full xl:mt-16'>{children}</div>
           <Footer />
         </ReactQueryProvider>
+        <Toaster position='bottom-center' />
       </body>
     </html>
   )

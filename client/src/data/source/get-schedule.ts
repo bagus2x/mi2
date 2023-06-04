@@ -7,7 +7,9 @@ const getSchedule = async (): Promise<Schedule> => {
     return {
       title: schedule.data.attributes.title,
       description: schedule.data.attributes.description,
-      image: schedule.data.attributes.image.data.attributes.url.startsWith('/') ? `${process.env.SERVER_BASE_URL}${schedule.data.attributes.image.data.attributes.url}`: schedule.data.attributes.image.data.attributes.url,
+      image: schedule.data.attributes.image.data.attributes.url.startsWith('/')
+        ? `${process.env.SERVER_BASE_URL}${schedule.data.attributes.image.data.attributes.url}`
+        : schedule.data.attributes.image.data.attributes.url,
       createdAt: new Date(schedule.data.attributes.createdAt).getTime(),
     }
   } catch (error) {

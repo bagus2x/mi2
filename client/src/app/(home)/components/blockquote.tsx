@@ -1,4 +1,4 @@
-import Quote from "@mi/data/models/quote"
+import Quote from '@mi/data/models/quote'
 
 type BlockquoteProps = Quote
 

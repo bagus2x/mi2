@@ -7,7 +7,7 @@ const useDraggableScroll = <T extends HTMLElement>() => {
     scrollTop: 0,
     scrollLeft: 0,
     mouseX: 0,
-    mouseY: 0
+    mouseY: 0,
   }
 
   const onMouseMove = (event: { clientX: number; clientY: number }) => {
@@ -28,7 +28,7 @@ const useDraggableScroll = <T extends HTMLElement>() => {
       scrollLeft: containerRef.current.scrollLeft,
       scrollTop: containerRef.current.scrollTop,
       mouseX: ev.clientX,
-      mouseY: ev.clientY
+      mouseY: ev.clientY,
     }
 
     containerRef.current.style.userSelect = 'none'

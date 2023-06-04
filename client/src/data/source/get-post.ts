@@ -1,5 +1,3 @@
-'server only'
-
 import Post from '@mi/data/models/post'
 import { SERVER_BASE_URL } from '@mi/utils/constants'
 
@@ -9,9 +7,9 @@ const getPost = async (id: number): Promise<Post> => {
       `${BASE_URL}/api/posts/${id}?populate=author,thumbnail,categories`,
       {
         next: {
-          revalidate: 0
-        }
-      }
+          revalidate: 0,
+        },
+      },
     )
     const { data } = (await res.json()) as PostResponse
 
@@ -20,16 +18,20 @@ const getPost = async (id: number): Promise<Post> => {
       title: data.attributes.title,
       body: data.attributes.body,
       summary: data.attributes.summary,
-      author: data.attributes.author ? {
-        id: data?.attributes?.author?.data?.id,
-        username: data?.attributes?.author?.data?.attributes?.username,
-        email: data?.attributes?.author?.data?.attributes?.email,
-      } : undefined,
+      author: data.attributes.author
+        ? {
+            id: data?.attributes?.author?.data?.id,
+            username: data?.attributes?.author?.data?.attributes?.username,
+            email: data?.attributes?.author?.data?.attributes?.email,
+          }
+        : undefined,
       categories: data.attributes.categories.data.map((category) => ({
         id: category.id,
         name: category.attributes.name,
       })),
-      thumbnail: data.attributes.thumbnail.data.attributes.url.startsWith('/') ? `${SERVER_BASE_URL}${data.attributes.thumbnail.data.attributes.url}` : data.attributes.thumbnail.data.attributes.url,
+      thumbnail: data.attributes.thumbnail.data.attributes.url.startsWith('/')
+        ? `${SERVER_BASE_URL}${data.attributes.thumbnail.data.attributes.url}`
+        : data.attributes.thumbnail.data.attributes.url,
       createdAt: new Date(data.attributes.createdAt).getTime(),
       updatedAt: new Date(data.attributes.updatedAt).getTime(),
     }

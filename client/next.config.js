@@ -8,8 +8,8 @@ const nextConfig = {
     scrollRestoration: true,
   },
   eslint: {
-    ignoreDuringBuilds: true
-  }
+    ignoreDuringBuilds: true,
+  },
 }
 
 module.exports = nextConfig

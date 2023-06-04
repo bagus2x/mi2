@@ -10,9 +10,9 @@ const getHeadlines = async (
       `${BASE_URL}/api/headlines?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=image,post`,
       {
         next: {
-          revalidate: 0
-        }
-      }
+          revalidate: 0,
+        },
+      },
     )
     const { data, meta } = (await res.json()) as GetHeadlinesResponse
 

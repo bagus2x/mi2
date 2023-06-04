@@ -7,12 +7,12 @@ export default async function Downloads() {
   const documents = await getDocument(1, 50)
 
   return (
-    <main className='m-auto h-full max-w-screen-xl py-4 w-full overflow-x-hidden xl:py-8'>
+    <main className='m-auto h-full w-full max-w-screen-xl overflow-x-hidden py-4 xl:py-8'>
       <div className='px-4'>
         <SectionLabel label='Download File' />
       </div>
       <div className='w-full overflow-x-auto px-4 pb-4'>
-        <table className='mt-4 w-full overflow-x-auto text-left text-sm max-w-screen-xl font-light'>
+        <table className='mt-4 w-full max-w-screen-xl overflow-x-auto text-left text-sm font-light'>
           <thead className='border-b font-medium dark:border-neutral-500'>
             <tr>
               <th scope='col' className='px-6 py-4'>

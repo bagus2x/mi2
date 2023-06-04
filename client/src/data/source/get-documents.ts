@@ -10,9 +10,9 @@ const getDocument = async (
       `${BASE_URL}/api/documents?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=file`,
       {
         next: {
-          revalidate: 0
-        }
-      }
+          revalidate: 0,
+        },
+      },
     )
     const { data, meta } = (await res.json()) as GetDocumentResponse
 
@@ -23,7 +23,7 @@ const getDocument = async (
           ? `${BASE_URL}${document.attributes.file.data.attributes.url}`
           : document.attributes.file.data.attributes.url,
         name: document.attributes.name,
-        createdAt: (new Date(document.attributes.createdAt)).getTime()
+        createdAt: new Date(document.attributes.createdAt).getTime(),
       })),
       pagination: meta.pagination,
     }
@@ -108,9 +108,9 @@ export type GetDocumentResponse = {
             updatedAt: string
           }
         }
-      },
+      }
       createdAt: string
-    },
+    }
   }>
   meta: {
     pagination: {
